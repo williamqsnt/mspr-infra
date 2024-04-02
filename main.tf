@@ -15,7 +15,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_instance" "mspr-ec2" {
-  ami           = "ami-0ebd2bf0042bb3e85"
+  ami           = "ami-00c71bd4d220aa22a"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public.id
 
@@ -48,4 +48,24 @@ resource "aws_route_table" "public" {
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
+}
+
+resource "aws_security_group" "allow_all" {
+  name        = "allow_all"
+  description = "Allow all inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
