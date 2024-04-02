@@ -14,12 +14,12 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 }
 
-resource "aws_instance" "example" {
-  ami           = "ami-1234567890abcdef0"
+resource "aws_instance" "mspr-ec2" {
+  ami           = "ami-0ebd2bf0042bb3e85"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    Name = "ExampleInstance"
+    Name = "mspr-ec2"
   }
 }
