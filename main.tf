@@ -18,6 +18,7 @@ resource "aws_instance" "mspr-ec2" {
   ami           = "ami-00c71bd4d220aa22a"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public.id
+  security_groups = [aws_security_group.allow_all]
 
   user_data = <<-EOF
               #!/bin/bash
